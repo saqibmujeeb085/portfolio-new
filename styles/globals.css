@@ -1,0 +1,391 @@
+@import "tailwindcss";
+
+/* Manual dark mode selector for Tailwind utilities */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =========================
+   THEME TOKENS
+========================= */
+:root {
+  --background: #f7f7f2;
+  --foreground: #121212;
+
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.9);
+  --surface-border: rgba(18, 18, 18, 0.08);
+
+  --muted: #6f6f6a;
+  --card: #ffffff;
+  --card-foreground: #121212;
+
+  --primary: #121212;
+  --primary-foreground: #f7f7f2;
+
+  --secondary: #ecece5;
+  --secondary-foreground: #121212;
+
+  --accent: #d9ff66;
+  --accent-foreground: #121212;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 999px;
+
+  --shadow-soft: 0 10px 30px rgba(18, 18, 18, 0.06);
+  --shadow-header: 0 10px 40px rgba(18, 18, 18, 0.08);
+
+  --header-height: 84px;
+  --container-desktop: 100px;
+  --container-tablet: 50px;
+  --container-mobile: 20px;
+
+  --border-subtle: 1px solid rgba(18, 18, 18, 0.08);
+
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: monospace;
+}
+
+.dark {
+  --background: #0c0c0d;
+  --foreground: #f3f3ef;
+
+  --surface: rgba(18, 18, 18, 0.62);
+  --surface-strong: rgba(18, 18, 18, 0.82);
+  --surface-border: rgba(255, 255, 255, 0.08);
+
+  --muted: #a3a39b;
+  --card: #141415;
+  --card-foreground: #f3f3ef;
+
+  --primary: #f3f3ef;
+  --primary-foreground: #111111;
+
+  --secondary: #1d1d1f;
+  --secondary-foreground: #f3f3ef;
+
+  --accent: #d9ff66;
+  --accent-foreground: #121212;
+
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.28);
+  --shadow-header: 0 10px 40px rgba(0, 0, 0, 0.32);
+
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Tailwind v4 theme tokens */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-surface-border: var(--surface-border);
+
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* =========================
+   BASE
+========================= */
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* testimonials */
+.testimonial-surface {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--background) 72%, transparent),
+    color-mix(in srgb, var(--background) 94%, transparent)
+  );
+}
+
+/* =========================
+   DESIGN SYSTEM UTILITIES
+========================= */
+.ds-container {
+  width: 100%;
+  padding-left: var(--container-desktop);
+  padding-right: var(--container-desktop);
+}
+
+@media (max-width: 1024px) {
+  .ds-container {
+    padding-left: var(--container-tablet);
+    padding-right: var(--container-tablet);
+  }
+}
+
+@media (max-width: 640px) {
+  .ds-container {
+    padding-left: var(--container-mobile);
+    padding-right: var(--container-mobile);
+  }
+}
+
+.ds-page-pad {
+  padding-top: calc(var(--header-height) + 24px);
+}
+
+.ds-glass {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: var(--surface);
+  border: var(--border-subtle);
+  box-shadow: var(--shadow-header);
+}
+
+.ds-header-pill {
+  border-radius: 999px;
+}
+
+.ds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-radius: 999px;
+  transition:
+    transform 240ms ease,
+    background-color 240ms ease,
+    color 240ms ease,
+    border-color 240ms ease,
+    opacity 240ms ease;
+}
+
+.ds-button:hover {
+  transform: translateY(-1px);
+}
+
+.ds-button-primary {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.ds-button-primary:hover {
+  opacity: 0.92;
+}
+
+.ds-button-secondary {
+  background: transparent;
+  color: var(--foreground);
+  border: var(--border-subtle);
+}
+
+.ds-nav-link {
+  position: relative;
+  transition: opacity 220ms ease;
+}
+
+.ds-nav-link:hover {
+  opacity: 0.72;
+}
+
+.ds-nav-link-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 18px;
+  height: 2px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: currentColor;
+}
+
+/* input css */
+
+input,
+textarea,
+select {
+  color: var(--foreground);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
+}
+
+select option {
+  color: #111;
+}
+
+/* custom dropdown scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--foreground) 14%, transparent);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--foreground) 22%, transparent);
+}
+
+/* footer */
+
+footer {
+  position: relative;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--background));
+  pointer-events: none;
+}
+
+/* hero */
+
+.hero-marquee-track {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* =========================
+   ULTRA PREMIUM CURSOR
+========================= */
+
+.has-custom-cursor,
+.has-custom-cursor body,
+.has-custom-cursor a,
+.has-custom-cursor button,
+.has-custom-cursor [role="button"],
+.has-custom-cursor input,
+.has-custom-cursor textarea,
+.has-custom-cursor select {
+  cursor: none !important;
+}
+
+.custom-cursor-wrap {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  contain: layout style size;
+}
+
+.custom-cursor-dot,
+.custom-cursor-ring {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+}
+
+.custom-cursor-ring {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* modes */
+.custom-cursor-wrap[data-mode="default"] .custom-cursor-dot {
+  background: #ffffff;
+}
+
+.custom-cursor-wrap[data-mode="default"] .custom-cursor-ring {
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: none;
+}
+
+.custom-cursor-wrap[data-mode="hover"] .custom-cursor-ring {
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 0 22px rgba(255, 255, 255, 0.08);
+}
+
+.custom-cursor-wrap[data-mode="accent"] .custom-cursor-dot {
+  background: #ffffff;
+}
+
+.custom-cursor-wrap[data-mode="accent"] .custom-cursor-ring {
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 34px rgba(255, 255, 255, 0.14),
+    0 0 60px rgba(255, 255, 255, 0.08);
+}
+
+/* Hide on touch / reduced motion */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .custom-cursor-wrap,
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none;
+  }
+}
