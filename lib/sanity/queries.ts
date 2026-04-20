@@ -360,3 +360,22 @@ export const allLegalPagesQuery = groq`
     order
   }
 `;
+
+
+// Site Settings Query
+export const siteSettingsQuery = groq`
+  *[_type == "siteSettings"][0] {
+    _id,
+    title,
+    description,
+    copyrightText,
+    ctaButtonText,
+    ctaButtonLink,
+    navigationLinks[] | order(order asc) {
+      label,
+      href,
+      order
+    },
+    showLegalInFooter
+  }
+`;

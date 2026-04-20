@@ -6,6 +6,7 @@ import {testimonialType} from './testimonialType'
 import {projectType} from './projectType'
 import {projectCategoryType} from './projectCategoryType'
 import {legalPageType} from './legalPageType'
+import {siteSettingsType} from './siteSettingsType'
 
 export const schemaTypes = [
   technologyType,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   projectCategoryType,
   projectType,
   legalPageType,
+  siteSettingsType,
 ]

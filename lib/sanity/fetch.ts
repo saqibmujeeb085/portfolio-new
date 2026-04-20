@@ -427,3 +427,21 @@ export async function getAllLegalPages() {
     }
   );
 }
+
+
+// Site Settings
+import { siteSettingsQuery } from "@/lib/sanity/queries";
+import type { SiteSettings } from "@/types/site-settings";
+
+export async function getSiteSettings() {
+  return sanityClient.fetch<SiteSettings | null>(
+    siteSettingsQuery,
+    {},
+    {
+      next: {
+        revalidate: 300,
+        tags: ["siteSettings"],
+      },
+    }
+  );
+}

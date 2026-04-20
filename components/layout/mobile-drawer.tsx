@@ -7,8 +7,9 @@ import { X } from "lucide-react";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { useUiStore } from "@/store/ui-store";
 import { cn } from "@/lib/utils/cn";
+import type { NavigationLink } from "@/types/site-settings";
 
-const navLinks = [
+const defaultNavLinks: NavigationLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
@@ -18,7 +19,11 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-export function MobileDrawer() {
+interface MobileDrawerProps {
+  navLinks?: NavigationLink[];
+}
+
+export function MobileDrawer({ navLinks = defaultNavLinks }: MobileDrawerProps) {
   const pathname = usePathname();
   const { mobileMenuOpen, setMobileMenuOpen } = useUiStore();
 
